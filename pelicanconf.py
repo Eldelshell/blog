@@ -20,8 +20,9 @@ TRANSLATION_FEED_ATOM = None
 LINKS =  ()
 
 # Social widget
-SOCIAL = (('twitter', 'http://twitter.com/Eldelshell'),
-          ('linkedin', 'http://es.linkedin.com/in/alejandroayuso/'))
+SOCIAL = (('Twitter', 'http://twitter.com/Eldelshell'),
+          ('Google+', 'https://plus.google.com/+AlejandroAyuso?rel=author'),
+          ('LinkedIn', 'http://es.linkedin.com/in/alejandroayuso/'))
 
 DEFAULT_PAGINATION = 10
 
@@ -30,5 +31,7 @@ RELATIVE_URLS = True
 
 FAVICON = 'static/images/favicon.ico'
 TWITTER_USERNAME = 'Eldelshell'
+BOOTSTRAP_THEME = 'flatly'
+GOOGLE_PLUS_ID = '+AlejandroAyuso'
 
 CC_LICENSE = "CC-BY"
