@@ -6,3 +6,5 @@
 2. Checkout this repo and the pages repo
 3. Generate the files with `make clean html`
 4. Copy to pages repo the output content
+
+## What?
