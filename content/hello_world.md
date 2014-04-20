@@ -3,7 +3,7 @@ Title: Hello Pelican
 Tags: pelican
 Category: Blog
 Slug: hello-world
-Author: Alejandro Ayuso
+Author: Eldelshell
 
 
 # Hi Pelican!
