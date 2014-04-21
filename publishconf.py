@@ -21,5 +21,6 @@ DELETE_OUTPUT_DIRECTORY = True
 # Following items are often useful when publishing
 
 #DISQUS_SITENAME = ""
-GOOGLE_ANALYTICS = 'UA-50208536-1'
-GOOGLE_ANALYTICS_SITE = 'eldelshell.github.io'
+GOOGLE_ANALYTICS_OLD = 'UA-50208536-1'
+# GOOGLE_ANALYTICS = 'UA-50208536-1'
+# GOOGLE_ANALYTICS_SITE = 'eldelshell.github.io'
