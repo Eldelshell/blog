@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 
 AUTHOR = u'Eldelshell'
 SITENAME = u'Eldelshell Blog'
-SITEURL = 'http://eldelshell.github.io'
+SITEURL = 'http://www.eldelshell.com'
 THEME = "theme/"
 LOCALE = 'en_US.UTF-8'
 
@@ -20,7 +20,9 @@ TRANSLATION_FEED_ATOM = None
 LINKS =  ()
 SOCIAL = (('Twitter', 'http://twitter.com/Eldelshell'),
           ('Google+', 'https://plus.google.com/+AlejandroAyuso?rel=author'),
-          ('LinkedIn', 'http://es.linkedin.com/in/alejandroayuso/'))
+          ('StackExchange', 'http://stackoverflow.com/users/48869/eldelshell'),
+          ('LinkedIn', 'http://es.linkedin.com/in/alejandroayuso/'),
+          ('RSS', 'http://www.eldelshell.com/feeds/all.atom.xml'))
 
 DEFAULT_PAGINATION = 10
 RELATIVE_URLS = True
@@ -30,3 +32,4 @@ BOOTSTRAP_THEME = 'flatly'
 GOOGLE_PLUS_ID = '+AlejandroAyuso'
 CC_LICENSE = "CC-BY"
 TAG_CLOUD_MAX_ITEMS = 20
+STACK_OVERFLOW = False
