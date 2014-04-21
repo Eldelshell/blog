@@ -150,3 +150,7 @@ figure.floatcenter, .align-center {
     margin-right: 10px;
 }
 
+.fa-stackexchange-square:before{
+    content:"\f18d"
+}
+
