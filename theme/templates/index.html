@@ -1,5 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
+	{% if INDEX_HEADER_TITLE %}
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="well">
+					<h1>{{ INDEX_HEADER_TITLE }}</h1>
+					<p></p>
+				</div>
+			</div>
+		</div>
+    {% endif %}
+
+
     {% if articles %}
         {% for article in (articles_page.object_list if articles_page else articles) %}
             <article>

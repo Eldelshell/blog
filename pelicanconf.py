@@ -33,3 +33,13 @@ GOOGLE_PLUS_ID = '+AlejandroAyuso'
 CC_LICENSE = "CC-BY"
 TAG_CLOUD_MAX_ITEMS = 20
 STACK_OVERFLOW = False
+PYGMENTS_OPTIONS = {'linenos': 'table'}
+
+# Generate the Jumbotron at index pages only
+INDEX_HEADER_TITLE = 'Software development and architecture blog'
+
+# SEO
+SEO_DESCRIPTION = 'Software and technology blog' 
+SEO_KEYWORDS = 'eldelshell, software, technology, java, linux, web, development, alejandro, ayuso, blog, personal'
+SITEMAP_SAVE_AS = 'sitemap.xml'
+DIRECT_TEMPLATES = ('index', 'archives', 'sitemap')

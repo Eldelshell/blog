@@ -18,6 +18,8 @@ CATEGORY_FEED_ATOM = None
 
 DELETE_OUTPUT_DIRECTORY = True
 
+# FILES_TO_COPY = ('extra/robots.txt', 'robots.txt')
+
 # Following items are often useful when publishing
 
 #DISQUS_SITENAME = ""
