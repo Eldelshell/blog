@@ -17,15 +17,15 @@ Basically, the problem is that even if your form class has a Date field and
 you registered a custom formatter as [explained here](http://stackoverflow.com/questions/13709987/play-2-0-framework-custom-form-field/13842675#13842675)
 , the Date value is not formatted when the template is rendered. Some code to explain
 
-```java
+~~~java
 public class MyForm {
     public LocalDate myDate;
 }
-```
+~~~
 
 In the controller you would have something like:
 
-```java
+~~~java
 MyForm myForm = new MyForm();
 myForm.myDate = new LocalDate();
 return ok(
@@ -33,7 +33,7 @@ return ok(
 		form(MyForm.class).fill(myForm)
 	)
 );
-```
+~~~
 
 If you try to use the value from this form you'll see that it follows the ISO 
 format yyyy-MM-dd, which is fine, until you're asked for this field to follow 
@@ -41,7 +41,7 @@ specific locale formats like dd/mm/yyyy or mm/dd/yyyy.
 
 To fix this I've created my own implementation of the inputDate template:
 
-```html
+~~~html
 @(field: play.api.data.Field, args: (Symbol,Any)*)(implicit handler: helper.FieldConstructor, lang: play.api.i18n.Lang)
  
 @**
@@ -80,7 +80,7 @@ To fix this I've created my own implementation of the inputDate template:
 		data-date-format="@dateFormat" 
 		@toHtmlArgs(htmlArgs) >
 }
-```
+~~~
 
 
 

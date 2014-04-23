@@ -16,7 +16,7 @@ The idea is that by pressing SUPER+LEFT the current window is placed on the left
 
 As mentioned, XFCE doesn't support this out-of-the-box, but it's very easy to implement:
 
-```python
+~~~python
 #!/usr/bin/env python
 # - coding: utf-8 -
  
@@ -151,7 +151,7 @@ if __name__ == '__main__':
     resize_window(active_window_id, desktop_dimensions)
  
     sys.exit(0)
-```
+~~~
 
 And that's pretty much it the whole script. You'll need to install _xdotool_ which 
 is what does all the magic. 

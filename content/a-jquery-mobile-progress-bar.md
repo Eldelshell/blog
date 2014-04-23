@@ -11,7 +11,7 @@ For my latest app I've been using jQuery Mobile which, to my surprise, doesn't c
 
 Luckily for you, here's the code to generate yours with as few lines of code as possible.
 
-```html
+~~~html
 <html>
 <head>
     <style type="text/css">
@@ -45,7 +45,7 @@ Luckily for you, here's the code to generate yours with as few lines of code as 
         })();
     </script>
 </body>
-```
+~~~
 
 This code is being used for the landing page of this app while it loads some stuff on the background.
 

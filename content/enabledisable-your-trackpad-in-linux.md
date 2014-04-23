@@ -9,7 +9,7 @@ Here's a small post about enabling/disabling a your trackpad, touchpad, or whate
 
 First, get to know your stuff with:
 
-```bash
+~~~bash
 $ xinput --list
 ⎡ Virtual core pointer                     id=2 [master pointer  (3)]
 ⎜   ↳ Virtual core XTEST pointer               id=4 [slave  pointer  (2)]
@@ -25,20 +25,20 @@ $ xinput --list
 ↳ Laptop_Integrated_Webcam_3M              id=10 [slave  keyboard (3)]
 ↳ AT Translated Set 2 keyboard             id=12 [slave  keyboard (3)]
 ↳ Dell WMI hotkeys                         id=15 [slave  keyboard (3)]
-```
+~~~
 
 This is what my current laptop (Dell M4500) shows. In this case we have three mice devices in the laptop: DualPoint Stick and AlpsPS/2 ALPS DualPoint TouchPad are in the laptop itself, and attached is the Logitech Optical USB Mouse.
 
 Now I want to disable those two devices and leave the Logitech mouse only. To do this simply run the following:
 
-```bash
+~~~bash
 $xinput --set-prop "AlpsPS/2 ALPS DualPoint TouchPad" "Device Enabled" 0
 $xinput --set-prop "DualPoint Stick" "Device Enabled" 0
-```
+~~~
 
 You also might want to add a few lines to your _.bashrc_ like:
 
-```bash
+~~~bash
 function enable-trackpad(){
 	xinput --set-prop "AlpsPS/2 ALPS DualPoint TouchPad" "Device Enabled" 1
 	xinput --set-prop "DualPoint Stick" "Device Enabled" 1
@@ -47,6 +47,6 @@ function disable-trackpad(){
 	xinput --set-prop "AlpsPS/2 ALPS DualPoint TouchPad" "Device Enabled" 0
 	xinput --set-prop "DualPoint Stick" "Device Enabled" 0
 }
-```
+~~~
 
 Hope this helps

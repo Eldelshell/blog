@@ -27,7 +27,7 @@ have to be as light and fast as possible.
 
 With those objectives in mind, this is what I came up with:
 
-```bash
+~~~bash
 $tree /home/play
 |-- bin
 | |-- all        #(script to start/stop all applications)
@@ -71,7 +71,7 @@ $tree /home/play
       | |-- foo-common-0.1-SNAPSHOT.jar      
       | |-- foo-bar_2.9.1-1.0-SNAPSHOT.jar
       `-- current -> 0.1-SNAPSHOT
-```
+~~~
 
 There are two tricky parts here: creating the startup scripts with the correct classpath 
 and separating Play's jar files from yours. Since my projects dependencies were few 
@@ -80,7 +80,7 @@ is to generate an empty Play application, run the stage option and copy the file
 
 The startup scripts, however you do them, you have to provide the correct options to Java:
 
-```bash
+~~~bash
 #!/bin/bash
 #
 # Play Admin Script
@@ -164,7 +164,7 @@ case ${1} in
 esac
  
 exit 0
-```
+~~~
 
 This will work with JDK 6 and JDK 7 which are the only ones which support this 
 classpath definitions. Since we're running many Play instances, we need to 

@@ -8,7 +8,7 @@ Author: Eldelshell
 
 Here's a little bash script to help you out hunting the different translatable labels your Play application has:
 
-```bash
+~~~bash
 #!/bin/bash
  
 tmp_file=$(mktemp)
@@ -58,7 +58,7 @@ rm "${tmp_file}"
 rm "${output_tmp}"
  
 exit ${flag_fail}
-```
+~~~
 
 The script will search all Java, HTML and JavaScript files for the following candidates:
 

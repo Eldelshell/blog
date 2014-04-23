@@ -14,9 +14,9 @@ First, clone this Git repo: [https://github.com/asual/lesscss-engine](https://gi
 
 Then build the project with mvn install and finally build the LESS files:
 
-```java
+~~~java
 java -jar /tmp/lesscss-engine/target/lesscss-engine-1.4.0-SNAPSHOT-cli.jar bootstrap.less bootstrap.css
-```
+~~~
 
 On a side note, modifying Bootstrap's LESS files with custom changes (i.e. fonts) is a very bad idea.
 

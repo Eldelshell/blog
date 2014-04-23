@@ -83,7 +83,7 @@ On each user's home folder, create an empty _.screenrc_ file. This file should b
 
 Next, and add your servers to this script:
 
-```bash
+~~~bash
 #!/bin/bash
 #
 # Screener script
@@ -158,7 +158,7 @@ validate_server
 echo "Connecting to ${server} $(whoami)"
 
 connect 
-```
+~~~
 
 This script allows a user to select a server from the given list and launchs a ssh session inside a screen session:
 

@@ -7,13 +7,13 @@ Author: Eldelshell
 
 Here's a little Bash script to run any Java application as a daemon. The only change you'll have to implement in your Java application is a handler for UNIX kill signals. Something like this:
 
-```java
+~~~java
 Signal.handle(new Signal("INT"), new SignalHandler () {
 	public void handle(Signal sig) {
 		System.exit(10);
 	}
 });
-```
+~~~
 
 That's an example, handle exceptions and other signals properly.
 
@@ -21,7 +21,7 @@ Now that your application is ready to handle a signal, be sure to be very specia
 
 Here's the Bash code:
 
-```bash
+~~~bash
 #!/bin/bash
 #
 # Startup Script
@@ -101,7 +101,7 @@ case ${1} in
 esac
 
 exit 0
-```
+~~~
 
 I believe the script is pretty straight forward. Cool thing is that if you use start, you will run your application normally, but using the nohup option, it will call nohup on the script and run itself in daemon mode. Now, the only way to stop this process is to call the stop option or directly kill it. Also, if your process somehow listens for any event, you can implement a special one which allows the process to restart itself. For example, if your application is a web service, you can call `curl http://localhost/restart`
 

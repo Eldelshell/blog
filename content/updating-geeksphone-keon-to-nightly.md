@@ -15,20 +15,20 @@ Download the latest nightly build from Geeksphone and unzip it somewhere.
 
 Now, add/edit the file `/etc/udev/rules.d/51-android.rules` with this two lines:
 
-```
+~~~
 SUBSYSTEM=="usb", ATTR{idVendor}=="05c6", MODE="0666", GROUP="plugdev"
 SUBSYSTEM=="usb", ATTR{idVendor}=="18d1", MODE="0666", GROUP="plugdev"
-```
+~~~
 
 Put the Keon on Airplane Mode and plug it to the computer with the USB cable.
 
-```bash
+~~~bash
 ./flash.sh
-```
+~~~
 
 You should get the following output:
 
-```
+~~~
 * daemon not running. starting it now on port 5037 *
 * daemon started successfully *
 < waiting for device >
@@ -53,7 +53,7 @@ finished. total time: 0.006s
 rebooting...
 
 finished. total time: 0.001s
-```
+~~~
 
 And there you go, a fresh FirefoxOS version.
 

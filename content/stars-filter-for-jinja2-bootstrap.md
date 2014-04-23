@@ -7,7 +7,7 @@ Author: Eldelshell
 
 Here's a simple Jinja2 filter to add FontAwesome 3.2.1 stars to a template:
 
-```python
+~~~python
 @app.template_filter('stars')
     def _jinja2_filter_stars(value):
         """
@@ -22,5 +22,5 @@ Here's a simple Jinja2 filter to add FontAwesome 3.2.1 stars to a template:
             for i in range(value, 5):
                 ret += '<i class="icon-star-empty"></i>'
         return ret
-```
+~~~
 

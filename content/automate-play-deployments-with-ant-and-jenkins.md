@@ -13,7 +13,7 @@ ANT script and a Bash script which will handle the servers restart in the host m
 
 Here's much of the ANT script in all its glory:
 
-```xml
+~~~xml
 <property file="${user.home}/build.properties" />
 <fail unless="play.path" message="Property play.path not set in build.properties file"/>
 <fail unless="project.version" message="Property project.version not set"/>
@@ -98,7 +98,7 @@ Here's much of the ANT script in all its glory:
    keyfile="${user.home}/.ssh/id_rsa" trust="true"
    command="/home/play/bin/deploy ${project.version.timestamp}"/>
 </target>
-```
+~~~
 
 So, what we basically want here is to setup Jenkins to call a single ANT tasks, 
 in this case _jenkins-play-build_ and set some properties as shown here:
@@ -108,7 +108,7 @@ in this case _jenkins-play-build_ and set some properties as shown here:
 The script used to finish the deploy process will restart the Play apps 
 and update the symlink pointing to the latest version we deployed
 
-```bash
+~~~bash
 #!/bin/bash
 #
 # Script to automate CI deployments. Simply stop all
@@ -137,5 +137,5 @@ for app in ${apps[@]}; do
 done
  
 exit 0
-```
+~~~
 For this to work, you'll need to configure SSH password-less authentication between you CI server and the target servers.

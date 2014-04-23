@@ -23,7 +23,7 @@ In Jinja2 a filter is a block of code that is applied on user demand on a given 
 
 First, you need to have Flask-Babel up and running. Next we will create our filter:
 
-```python
+~~~python
 @babel.localeselector
 def get_locale():
     return request.accept_languages.best_match(LANGUAGES.keys())
@@ -37,19 +37,19 @@ def _jinja2_filter_datetime(date, fmt=None):
         return date.strftime(fmt)
     else:
         return date.strftime(gettext('%%m/%%d/%%Y'))
-```
+~~~
 
 On your Jinja2 templates, you only need a datetime and apply the date filter:
 
-```python
+~~~python
 {{ obj.date | date }}
-```
+~~~
 
 Or pass it a different format
 
-```python
+~~~python
 {{ obj.date | date(_('%%Y.%%m.%%d')) }}
-```
+~~~
 
 The only "magical" parts here is the `gettext('%%m/%%d/%%Y')` and `_('%%Y.%%m.%%d')`. 
 Now you can add to your different .po files the different formats to use for each language.

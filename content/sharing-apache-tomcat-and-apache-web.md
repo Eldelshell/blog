@@ -57,7 +57,7 @@ Of course, you should use the DNS names instead of the IP addresses. Also, there
 
 Second, you need your __jk.conf__ file:
 
-```apache
+~~~apache
 JkWorkersFile /etc/apache2/conf.d/jkworkers.properties
 JkLogFile /var/log/apache2/mod_jk.log
 JkLogLevel info
@@ -71,11 +71,11 @@ JkShmFile /var/log/httpd/jk.shm
 	Deny from all
 	Allow from 127.0.0.1
 </Location>
-```
+~~~
 
 And finally, you can set up your virtual host in the, for example, __intranet.conf__ file:
 
-```apache
+~~~apache
 <VirtualHost *:80>
   ServerName intranet
   RewriteEngine on
@@ -96,7 +96,7 @@ And finally, you can set up your virtual host in the, for example, __intranet.co
   JkMount /monitoring/* server1
   JkMount /hradmin/* hrlb
 </VirtualHost>
-```
+~~~
 
 What we're doing here is telling the Apache server to listen on port 80 for all requests to the intranet host and to forward this requests to their corresponding applications:
 

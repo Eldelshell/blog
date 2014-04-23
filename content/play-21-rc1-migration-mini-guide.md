@@ -11,20 +11,20 @@ be able to boot up the play console without an `org.scala-sbt#sbt;0.11.3: not fo
 
 In the file plugins.sbt you need to change the line:
 
-```scala
+~~~scala
 addSbtPlugin("play" % "sbt-plugin" % "2.0.3")
 addSbtPlugin("play" % "sbt-plugin" % "2.1-RC1")
-```
+~~~
 
 In the file _build.properties_ you need to change:
 
-```
+~~~
 sbt.version=0.11.3
 sbt.version=0.12.0
-```
+~~~
 Finally, the file _Build.scala_ should look like:
 
-```scala
+~~~scala
 import sbt._
 import Keys._
 // 2.0.3 import PlayProject._
@@ -46,7 +46,7 @@ object ApplicationBuild extends Build {
         resolvers += "Local Maven Repository" at "file:///"+Path.userHome.absolutePath+"/.m2/repository/"
     )
 }
-```
+~~~
 
 Now you should be able to run play on your project and start changing 
 stuff... since there are more changes which once you "run" or  "compile" 

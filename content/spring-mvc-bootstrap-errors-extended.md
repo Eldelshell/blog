@@ -8,7 +8,7 @@ Author: Eldelshell
 This is an extension of the JSP Tag from [Duck Ranger](http://duckranger.com/2012/07/spring-mvc-and-twitter-bootstrap-customizing-the-input-fields/)
 to allow for appending and prep-ending of icons to bootstrap's input fields:
 
-```jsp
+~~~jsp
 <%@tag description="Extended input tag to allow for sophisticated errors" pageEncoding="UTF-8"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -62,4 +62,4 @@ to allow for appending and prep-ending of icons to bootstrap's input fields:
     </div>
   </div>
 </s:bind>
-```
+~~~

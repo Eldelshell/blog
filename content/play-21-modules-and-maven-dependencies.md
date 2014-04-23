@@ -10,7 +10,7 @@ brings to the framework. But, to be able to set our local maven repositories,
 it seems you have to do it for all sub-modules. So, in the parent's _Build.scala_
 file you should use something like:
 
-```scala
+~~~scala
 object ApplicationBuild extends Build {
  
   val appName         = "app"
@@ -48,6 +48,6 @@ object ApplicationBuild extends Build {
     lessEntryPoints <<= baseDirectory(_ / "app" / "assets" / "css" ** "custom.less")
   ).dependsOn(admin, mobile).aggregate(admin, mobile)
 }
-```
+~~~
 
 With this you set all modules to use the same repositories, including the local maven repository.

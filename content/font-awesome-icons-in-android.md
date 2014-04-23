@@ -10,39 +10,39 @@ Here's a small example of how to use Font Awesome in your Android apps. First of
 download font-awesome and place the __fontawesome-webfont.ttf__ file in your assets folder.
 Then, add to your __strings.xml__ file the definitions generated like this:
 
-```xml
+~~~xml
 <string name="icon_glass">&#xf000;</string>
 <string name="icon_music">&#xf001;</string>
 <string name="icon_search">&#xf002;</string>
 <string name="icon_envelope_alt">&#xf003;</string>
 <string name="icon_heart">&#xf004;</string>
-```
+~~~
 
 To generate this XML you can use this small bash snippet:
 
-```bash
+~~~bash
 grep "\f" variables.less | awk -F\" '{ print $1 $2 ";</string>" }' | sed 's/\\/\&#x/' | sed 's/@/<string name=\"icon_/' | sed 's/:\ /\">/' | sed 's/-/_/g'
-```
+~~~
 
 Now, you'll need to set the _Typeface_ for each widget you're going to put an icon, for example, a __Button__:
 
-```xml
+~~~xml
 <Button
  android:id="@+id/button2"
  android:layout_width="wrap_content"
  android:layout_height="wrap_content"
  android:textColor="#ff0000"
  android:text="@string/icon_heart" />
-```
+~~~
 
 Then the Java code to use this Typeface looks like:
 
-```java
+~~~java
 Typeface font = Typeface.createFromAsset( activity.getAssets(), "fontawesome-webfont.ttf" );
 ...
 button.setTypeface(font);
 
-```
+~~~
 
 Since it's a font, you can control the color and size of the icons programmatically 
 and the icons will scale automatically. The biggest downside is that 
@@ -54,7 +54,7 @@ You can place your icons in pretty much any part of the __ActionBar__ title or i
 
 ![Android Menu with FontAwesome Icons](|filename|/images/Selection_096.png "Android Menu with FontAwesome Icons")
 
-```java
+~~~java
 for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
     final TextView t = new TextView(this);
     t.setText(mSectionsPagerAdapter.getPageTitle(i));
@@ -71,12 +71,12 @@ public CharSequence getPageTitle(int position) {
     switch (position) {
         case 0:
             return activity.getResources().getString(R.string.icon_user);
-```
+~~~
 
 You can also customize the __ActionBar__ title with a very cool hack. First,
 you'll need to create a `MetricAffectingSpan` like this one:
 
-```java
+~~~java
 public class TypefaceSpan extends MetricAffectingSpan {
  
   private Typeface mTypeface;
@@ -105,11 +105,11 @@ public class TypefaceSpan extends MetricAffectingSpan {
       p.setFlags(p.getFlags() | Paint.SUBPIXEL_TEXT_FLAG);
   }
 }
-```
+~~~
 
 Then you change the __ActionBar__ title on your activity `onCreate` method:
 
-```java
+~~~java
 @Override
 protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -127,7 +127,7 @@ protected void onCreate(Bundle savedInstanceState) {
     actionBar.setTitle(s);
     actionBar.setIcon(android.R.color.transparent); // hide the app's icon
 }
-```
+~~~
 
 The result is the following:
 
