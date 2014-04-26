@@ -1,0 +1,15 @@
+<!-- includes/twitter_cards.html -->
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:creator" content="@{{TWITTER_USERNAME}}">
+
+{% if article %}
+    <meta name="twitter:title" content="{{article.title|striptags}}">
+    <meta name="twitter:description" content="{{ article.summary|striptags }}">
+{% else %}
+    <meta name="twitter:title" content="{{ SITENAME }}">
+    <meta name="twitter:description" content="{{ SITESUBTITLE }}">
+{% endif %}
+
+{% if GRAVATAR_IMAGE %}
+{% endif %}

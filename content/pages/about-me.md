@@ -26,8 +26,9 @@ Videogames, programming & my kids.
 
 Read a joke in twitter that went something like:
 
-	Q: How do you say "Linux user" in [Elvish](http://en.wikipedia.org/wiki/Elvish_languages)?
-	A: Eldelbash (it's funny in Spanish)
+>Q: How do you say "Linux user" in [Elvish](http://en.wikipedia.org/wiki/Elvish_languages)?
+>
+>A: Eldelbash (it's funny in Spanish)
 
 So, it got me inspired and changed it to __Eldelshell__ which translates to "Thou who uses the shell".
 
