@@ -152,7 +152,7 @@ The result should be:
 
 > I'm done!
 
-You can download the check the Maven project [here]() and run it with:
+You can check the Maven project [here](https://github.com/Eldelshell/blog/tree/master/examples/spring4-async-example) and run it with:
 
 ~~~bash
 $ mvn clean install exec:java -Dexec.mainClass="osuya.example.Spring4Tasks"
