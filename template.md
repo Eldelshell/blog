@@ -3,5 +3,6 @@ Title: TITLE
 Tags: TAGS
 Category: Blog
 Slug: SLUG
+Status: draft
 Author: Eldelshell
 
