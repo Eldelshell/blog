@@ -1,9 +1,8 @@
 Date: 2014-08-29
-Title: JobHunter 0.0.1
+Title: JobHunter and JavaFX
 Tags: projects
 Category: Blog
 Slug: jobhunter-presentation
-Status: draft
 Author: Eldelshell
 
 Today I added the first release of a new open source project called *JobHunter* which
@@ -11,10 +10,6 @@ is my take at trying to fix a very personal problem: managing all the jobs I've 
 applying for and have a central reference from all the different job portals.
 
 You can download it from [Github](https://github.com/Eldelshell/JobHunter)
-
-Being unemployeed for some time now and with things really slow during July and August,
-I made this little tool with JavaFX, which for some reason I've been looking to learn
-for a while now.
 
 ## What it does?
 
@@ -35,9 +30,8 @@ The things you can keep track are:
 At first, adding jobs one by one wasn't a problem, but then I started to search for public APIs
 and luckily many job portals have a public API which can be used to import the job's data into
 *JobHunter*. Instead of building *JobHunter* around this feature, I created a plugin system
-which would allow people to add their own plugins to import jobs from any portal with a public API.
-Currently, there's only one plugin (InfoJobs API) and I'm looking to add one for LinkedIn and another
-for Xing.
+which would allow people to add their own plugins to import jobs from any portal with a public API
+or by doing some scrapping.
 
 ## How it was made?
 
@@ -45,23 +39,26 @@ for Xing.
 the following dependencies:
 
 * Maven 3 as build system.
-* MVEL2 to generate the HTML templates used in the WebView that displays your jobs in the main screen.
+* MVEL2 to generate HTML.
 * XStream for the XML persistence.
 * Jackson for JSON data handling (to be used by Plugins)
 * Commons HttpClient (to be used by Plugins)
+* jSOUP to parse HTML (to be used by Plugins)
 * Reflections to load the plugins.
-* ControlsFX to extend JAvaFX features.
+* ControlsFX to extend JavaFX features.
 
 ## JavaFX
 
-First, I want to state that I wanted to do some desktop stuff which I haven't done in a long while and since
+First, I want to state that I wanted to do some desktop stuff, which I haven't done in a long while. Since
 I've already used SWT, Swing, GTK, Qt and WxWidgets I wanted to learn something new and JavaFX would allow me
 to learn two things at the same time: JavaFX and Java8 (Stream, Lambdas, etc).
 
 The hardest part with JavaFX was setting up my Maven project to correctly execute and include all of JavaFX
 libraries, but nothing a quick search wouldn't fix.
 
- Using a tool like _JavaFXSceneBuilder_ made things pretty easy, and if you've ever done any GUI
+### JavaFXSceneBuilder 2.0
+
+Using a tool like _JavaFXSceneBuilder_ made things pretty easy, and if you've ever done any GUI
 applications, you won't be dissapointed that the standard stuff is there. Hell, even Android devs should
 understand JavaFX in no time. Mind that _JavaFXSceneBuilder_ is kind of raw and needs lots of work 
 to reach the quality of similar tools, but it really helps when working with complex layouts.
@@ -71,7 +68,7 @@ the things I found to give me more flexibility was to not indicate the _controll
 add it later when you're importing the layout:
 
 ~~~java
-public Optional<Parent> load() {
+default Optional<Parent> load() {
 	FXMLLoader fxmlLoader = new FXMLLoader(MyController.class.getResource(PATH));
 	fxmlLoader.setController(this);
 	try {
@@ -83,7 +80,7 @@ public Optional<Parent> load() {
 }
 ~~~
 
-Another great feature of JavaFX is the use of a sort of CSS (`-fx-background-color`) to handle the styling
+Another great feature of JavaFX is the use of a sort of CSS (i.e. `-fx-background-color`) to handle the styling
 of the application, separating concerns in three ways:
 
 * Java code for logic.
@@ -97,12 +94,12 @@ also help with its CSS analyzer, which works in pretty much the same way as the 
 ### Progress bars and Worker
 
 One of the hardest things in GUI development is progress bars, and JavaFX comes a long way to help on this
-with its own threading system based on the `Worker` interface. Basically, you kill two birds: easy threading and
+with its own threading system based on the `Worker` interface. This system gives easy threading and
 good UX. As an example, this is how I handle importing a job from a remote API:
 
 ~~~java
-ImportService s = new ImportService(result.get());
-				
+ImportService s = new ImportService(url);
+		
 s.setOnSucceeded((event) -> {
 	// FTW!
 });
@@ -115,6 +112,29 @@ Dialogs.create().message("Importing...").showWorkerProgress(s);
 s.start();
 ~~~
 
+The `ImportService` is an `Observer` of the class which does the connection and HTML parsing like:
+
+~~~java
+@Override
+protected Job call() throws Exception {
+	try{
+		return Client.of(url).observe(this).execute();
+	}catch(Exception e) {
+		throw new MonsterAPIException("Failed to import");
+	}
+}
+
+@Override
+public void update(Observable o, Object arg) {
+	Client.Event event = (Client.Event) arg;
+	// Use Task methods to indicate the changes to the progress dialog
+	updateMessage(event.message);
+	updateProgress(event.position, event.total);
+}
+~~~
+
+The progress dialog will pickup the events raised by our `Task` and update itself.
+
 ## Java 8
 
 If there's something for which Java 8 new lambdas are useful are with JavaFX (or Swing for that matter):
@@ -123,6 +143,7 @@ If there's something for which Java 8 new lambdas are useful are with JavaFX (or
 ~~~java
 // With Java 8
 profileController.setListener(() -> {
+	// () indicates empty args
 	refresh();
 });
 
@@ -136,3 +157,10 @@ profileController.setListener(new ProfileRepositoryListener() {
 ~~~
 
 I believe the reason for Lambdas is clear.
+
+## Wrap up
+
+The experience have been very productive and I find JavaFX to be a great way to develop GUI applications. Much of the
+code noise associated with Swing is gone and code is much cleaner and easier to write thanks to Java8 new features. Also,
+any new JavaFX project should include *ControlsFX* if not only for the `Dialogs` but also as a good example of creating
+stuff with JavaFX. 
