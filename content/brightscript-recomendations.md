@@ -132,6 +132,8 @@ If your first function is `toString()` your second one will be a proper logger, 
 ' Usage:
 ' l = getLogger("MyPage.brs")
 ' l.info("Hello {0}", "World")
+' Result:
+' [01-12-2014 00:00:00.100] [INFO] [MyPage.brs] Hello World
 function getLogger(parent as String) as Object
     logger = {
         date:   createObject("roDateTime"),
@@ -144,7 +146,7 @@ function getLogger(parent as String) as Object
         end function
         
         log: function(str as String, level as String) as Void
-            print substitute(m.format, m.getTimestamp(), level, m.root, str)
+            print substitute(m.format, m.getTimestamp(), level, m.parent, str)
         end function
         
         info: function(str as String, a = Invalid as Dynamic, b = Invalid as Dynamic) as Void
@@ -169,6 +171,32 @@ function getLogger(parent as String) as Object
 end function
 ~~~
 
-~~~vb
+### Testing
 
+If you're used to fancy testing frameworks like jUnit or Mockito, you're out of luck with BrightScript. This doesn't mean you shouldn't do unit testing, but that it will require some scripting magic. If you're using the `app.mk` make file from the SDK (which is the best thing to use to build and deploy your channel to the hardware) modifying your source code to run your tests shouldn't be too hard. You could, for example, modify the make script to modify your `main` function to run your tests before the channel's code. Something like:
+
+~~~vb
+' main.brs
+sub main(args as Dynamic)
+    doTests = [TEST_TAG] ' value changed via make + sed -i s/[TEST_TAG]/true/ source/main.brs
+    
+    if doTests then runAllTests()
+    
+    ' Continue to channel code
+    ...
+end sub
 ~~~
+
+### Editors
+
+While this project lasted I used VIM and jEdit. For VIM you can download the syntax highlight file from Roku's site. For jEdit you can reuse the one of VisualBasic and modify it a little to BrightScript needs.
+
+I could get the Eclipse plugin to work, so don't waste more than a few minutes with it if it doesn't work at first.
+
+My coworkers used Sublime Text which worked quite well too. I also tried with gEdit and it too worked quite fine.
+
+### Miscellaneous
+
+ * Always call `date.toLocalTime()` after you instantiate a new `roDateTime`.
+ * Reuse the `roUrlTransfer` object for faster connections.
+ * Add all required headers to HTTP connections.
