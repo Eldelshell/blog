@@ -43,6 +43,39 @@ hit with some _features_ of BrightScript:
  * Functional (like JavaScript)
  * Case insensitive (like Visual Basic)
 
+For explicit unique objects it might not be a big deal, but when you write some utility function (which you will)
+like `toString` you'll wish you started to emulate namespaces:
+
+~~~vb
+' File stringUtils.brs
+' You could write this
+function toString(any as Dynamic) as String
+    ...
+end function
+
+' Or keep some order
+function StringUtils() as Object
+    return {
+        toString: function(any as Dynamic) as String
+            ...
+        end function
+    }
+end function
+~~~
+
+Now you can have a `toString` for native types (integers, booleans, etc), for collections (array, associative array) and for different objects, for example:
+
+~~~vb
+' You'll write this one for sure
+function DateUtils() as Object
+    return {
+        toString: function(date as Object) as String
+            ...
+        end function
+    }
+end function
+~~~
+
 A good example of BrightScript™ code is the _customvideoplayer_ example in the SDK. You'll want a more OO aproach:
 
 ~~~vb
@@ -53,11 +86,89 @@ function getMyPage() as Object
     
     setup: function() as Void
       m.screen.setMessagePort(m.port)
+    end function,
+    
+    eventLoop: function() as Void
+        while true
+            msg = wait(0, m.port)
+        end while
     end function
     
     show: function() as Void
       m.screen.show()
+      m.eventLoop()
     end function
   }
 end function
+~~~
+
+### toString
+This is one of the first functions you'll want to write and to do it right because BrightScript doesn't like code you take for granted in other languages, like string concatenations:
+
+~~~vb
+print "This is a String" + 1
+' Will fail with a Type error
+~~~
+
+So, your `StringUtils().toString(any)` function should be able to take anything and be able to convert it to a string which you can later use to print/debug stuff.
+
+### Always wait()
+
+As you can see in my code above, I used the global function `wait()` which is described in the documentation as
+
+> returns the event object that was posted to the message port. If timeout is zero, "wait" will wait for ever. Otherwise, Wait will return after timeout milliseconds if no messages are received. In this case, Wait returns a type "invalid".
+
+You don't want to make the mistake of doing `msg = m.port.getMessage()` and leave that `while` loop running like crazy. Better to `wait()` for the events.
+
+### Debugging
+
+Here's the deal with debugging: it doesn't work. We were working with the newest firmwares and the debugging console didn't work. So, you're left with doing the old-school debugging technic of using logs.
+
+### Logging
+
+If your first function is `toString()` your second one will be a proper logger, because you don't want to use `print` or `?` and later on remove all of them or some of them. Here's my take at a logger:
+
+~~~vb
+' Usage:
+' l = getLogger("MyPage.brs")
+' l.info("Hello {0}", "World")
+function getLogger(parent as String) as Object
+    logger = {
+        date:   createObject("roDateTime"),
+        parent: parent,
+        level:  0,
+        format: "[{0}]" + chr(9) + "[{1}]" + chr(9) + "[{2}]: {3}",
+        
+        setup: function() as Void
+            m.date.toLocalTime()
+        end function
+        
+        log: function(str as String, level as String) as Void
+            print substitute(m.format, m.getTimestamp(), level, m.root, str)
+        end function
+        
+        info: function(str as String, a = Invalid as Dynamic, b = Invalid as Dynamic) as Void
+            if m.level >= 2 then
+                msg = substitute(str, StringUtils().toString(a), StringUtils().toString(b))
+                m.log(msg, "INFO")
+            end if
+        end function
+        
+        getTimestamp: function() as String
+            m.date.mark()
+            timeStamp = m.date.asDateString("short-date-dashes")
+            timeStamp = timeStamp + " " + m.date.getHours().toStr()
+            timeStamp = timeStamp + ":" + m.date.getMinutes().toStr()
+            timeStamp = timeStamp + ":" + m.date.getSeconds().toStr()
+            timeStamp = timeStamp + "." + m.date.getMilliseconds().toStr()
+            return timeStamp
+        end function
+    }
+    logger.setup()
+    return logger()
+end function
+~~~
+
+~~~vb
+
 ~~~
