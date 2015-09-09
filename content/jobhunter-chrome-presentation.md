@@ -9,7 +9,7 @@ Today I added the first release of a new open source project called *JobHunter* 
 is my take at trying to fix a very personal problem: managing all the jobs I've been
 applying for and have a central reference from all the different job portals.
 
-You can install it from the [Chrome Web Store](https://github.com/Eldelshell/JobHunter)
+You can install it from the [Chrome Web Store](https://chrome.google.com/webstore/detail/jobhunter/gldahcpimmpidgnonlioblncljkicjak)
 
 ![JobHunter](|filename|/images/Selection_481.png "JobHunter")
 
